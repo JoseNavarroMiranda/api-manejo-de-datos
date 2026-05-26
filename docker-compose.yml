@@ -17,7 +17,7 @@ services:
       timeout: 5s
       retries: 5
 
-  api:
+  fastapi:
     build: .
     container_name: api
     restart: on-failure
@@ -28,6 +28,11 @@ services:
       - "8000:8000"
     environment:
       DATABASE_URL: "mssql+pyodbc://sa:${DB_PASSWORD}@sqlserver:1433/${DB_NAME}?driver=ODBC+Driver+18+for+SQL+Server&TrustServerCertificate=yes"
+
+networks:
+  costumer_network:
+    name: fastapinet
+    driver: bridge
 
 volumes:
   sqlserver_data:
