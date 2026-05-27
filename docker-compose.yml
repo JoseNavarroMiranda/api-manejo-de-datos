@@ -26,6 +26,8 @@ services:
         condition: service_healthy
     ports:
       - "8000:8000"
+    volumes:
+      - ./:/app
     environment:
       DATABASE_URL: "mssql+pyodbc://sa:${DB_PASSWORD}@sqlserver:1433/${DB_NAME}?driver=ODBC+Driver+18+for+SQL+Server&TrustServerCertificate=yes"
 
