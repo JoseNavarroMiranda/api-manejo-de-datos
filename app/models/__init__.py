@@ -6,6 +6,8 @@ from app.models.employees import Employee
 from app.models.locations import Location
 from app.models.maintenance_logs import MaintenanceLog
 from app.models.assignaments import Assignment
+from app.models.users import User
+
 
 
 __all__ = [
@@ -17,4 +19,5 @@ __all__ = [
     "Location",
     "MaintenanceLog",
     "AuditLog",
+    "User",
 ]
