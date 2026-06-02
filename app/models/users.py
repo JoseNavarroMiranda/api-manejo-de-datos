@@ -29,13 +29,13 @@ class User(Base):
 
     password: Mapped[str] = mapped_column(
         "password",
-        String(18),
+        String(255),
         nullable=False
     )
 
     role: Mapped[str] = mapped_column(
         "role",
-        Unicode(20),
+        Unicode(25),
         nullable=False,
         default="viewer",
     )
@@ -44,4 +44,9 @@ class User(Base):
         DateTime(timezone=True),
         server_default=func.sysdatetimeoffset(),
         nullable=False,
+    )
+    updated_at: Mapped[datetime | None] = mapped_column(
+        "updated_at",
+        DateTime(timezone=True),
+        nullable=True,
     )
