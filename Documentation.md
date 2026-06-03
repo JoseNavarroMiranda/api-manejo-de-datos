@@ -1,6 +1,6 @@
 # Lineas de comando que permite ingresar a comandline de imagen de sqlserver
 
-1. Docker exec -it sqlserver bash
+1. docker exec -it sqlserver bash
 
 2. /opt/mssql-tools18/bin/sqlcmd  -S localhost -U sa -P (ingresapass de .env) -C
 

@@ -18,3 +18,13 @@ router = APIRouter(
 def create_user(user: UserCreate, db: Session = Depends(get_db)):
     service = UserService(db)
     return service.create_user(user)
+
+
+@router.get(
+        "/allusers",
+        response_model=list[UserResponse],
+        status_code=200
+)
+def get_all_users(db: Session = Depends(get_db)):
+    service = UserService(db)
+    return service.get_all_users()
