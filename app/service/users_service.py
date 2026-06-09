@@ -42,7 +42,7 @@ class UserService:
         user = self._get_user_or_404(user_id)
         try:
             user.password = hash_password(data.password)
-            user.update_at = datetime.now(timezone.utc)
+            user.updated_at = datetime.now(timezone.utc)
             self.db.commit()
             self.db.refresh(user)
             return {"message": "Contraseña actualizada correctamente"}
@@ -51,13 +51,17 @@ class UserService:
 
 
     def disable_user(self, user_id, data: UserUpdate):
+        """Funcion para realizar operacion de desabilitar o habilitar usuario
+            realiza validacion si el body de status no es None, para evitar que se cambiar valor bool"""
         user = self._get_user_or_404(user_id)
         try:
-            user.status = data.status
-            user.update_at = datetime.now(timezone.utc)
+            if data.status is not None:
+                user.status = data.status
+            user.updated_at = datetime.now(timezone.utc)
             self.db.commit()
             self.db.refresh(user)
-            return {"Message": "Usuario deshabilitado correctamente"}
+            mensaje = "Usuario habilitado correctamente" if user.status else "Usuario deshabilitado correctamente"
+            return {"message": mensaje}
         except Exception as e:
             raise HTTPException(status_code=400, detail=str(e))
 

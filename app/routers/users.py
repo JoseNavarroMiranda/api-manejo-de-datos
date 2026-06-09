@@ -45,16 +45,16 @@ def get_user_by_id(user_id: int, db: Session = Depends(get_db)):
         response_model=MessageResponse,
         status_code=200 
 )
-def update_password_user(user: UserUpdate, user_id, db: Session = Depends(get_db)):
+def update_password_user(user: UserUpdate, user_id: int, db: Session = Depends(get_db)):
     service = UserService(db)
     return service.update_password_user(user_id, user)
 
 
 @router.put(
         "/disable_user/{user_id}",
-        reponse_model=MessageResponse,
+        response_model=MessageResponse,
         status_code=200
 )
-def disable_user(user: UserUpdate, user_id, db: Session = Depends(get_db)):
+def disable_user(user: UserUpdate, user_id: int, db: Session = Depends(get_db)):
     service = UserService(db)
     return service.disable_user(user_id, user)
