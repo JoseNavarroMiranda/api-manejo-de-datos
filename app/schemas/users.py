@@ -33,6 +33,18 @@ class MessageResponse(BaseModel):
     message: str
 
 
+class LoginRequest(BaseModel):
+    """Clase que recibe dos parametros y permite realizar el login de usuario"""
+    username: str
+    password: str
+
+
+class TokenResponse(BaseModel):
+    """Clase que reponse el token para la creacion de este mismo"""
+    access_token: str
+    token_type: str 
+    message: str
+
 
 
 

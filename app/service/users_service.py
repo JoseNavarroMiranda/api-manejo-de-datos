@@ -1,10 +1,10 @@
+from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
 from app.models.users import User
 from app.schemas.users import UserCreate, UserUpdate
 from app.utils.security import hash_password
 from datetime import datetime, timezone
-from fastapi import HTTPException
 
 class UserService:
     def __init__(self, db: Session):
