@@ -14,10 +14,24 @@ class UserResponse(BaseModel):
     """Clase donde se colocan los datos que se mandaran a llamar con peticiones post"""
     user_id: int
     username: str
-    password: str
     role: str
+    status: bool
     created_at: datetime
     updated_at: datetime | None
+
+
+class UserUpdate(BaseModel):
+    """Clase que utilizara el metodo put para realizar actualizacion de password"""
+    username: str | None = None
+    password: str | None = None
+    status: bool | None = None
+    role: str | None = None
+
+
+class MessageResponse(BaseModel):
+    """Clase que se utilizara para poder pasar el comentario de la peticion"""
+    message: str
+
 
 
 

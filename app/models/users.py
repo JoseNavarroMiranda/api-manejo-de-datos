@@ -39,12 +39,20 @@ class User(Base):
         nullable=False,
         default="viewer",
     )
+
+    status: Mapped[bool] = mapped_column(
+        "status",
+        nullable=False,
+        default=True,
+    )
+
     created_at: Mapped[datetime] = mapped_column(
         "created_at",
         DateTime(timezone=True),
         server_default=func.sysdatetimeoffset(),
         nullable=False,
     )
+    
     updated_at: Mapped[datetime | None] = mapped_column(
         "updated_at",
         DateTime(timezone=True),
