@@ -11,6 +11,7 @@ class UserService:
     def __init__(self, db: Session):
         self.db = db
 
+
     def create_user(self, data: UserCreate) -> User:
         """Crea un nuevo usuario adicional que se realice el hash de la pass utiliza dos funciones de busqueda de usuario y funcion de rol"""
         self._valid_roles(data.role)
@@ -51,6 +52,7 @@ class UserService:
             return {"message": "Contraseña actualizada correctamente"}
         except Exception as e:
             raise HTTPException(status_code=400, detail=str(e))
+
 
     def update_role_user(self, user_id, data: UserUpdate):
         user = self._get_user_or_404(user_id)
