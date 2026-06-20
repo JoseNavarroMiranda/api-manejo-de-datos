@@ -2,6 +2,8 @@ from datetime import datetime
 
 from sqlalchemy import String, Unicode, DateTime, func, CheckConstraint
 from sqlalchemy.orm import Mapped, mapped_column
+from uuid import  uuid4
+
 
 from app.database import Base
 
@@ -14,10 +16,12 @@ class User(Base):
         ),
     )
 
-    user_id: Mapped[int] = mapped_column(
+    user_id: Mapped[str] = mapped_column(
         "user_id",
+        String(36),
         primary_key=True,
-        autoincrement=True,
+        autoincrement=False,
+        default=lambda: str(uuid4())
     )
 
     username: Mapped[str] = mapped_column(

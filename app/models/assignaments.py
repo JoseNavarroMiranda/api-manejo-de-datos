@@ -1,6 +1,7 @@
 from datetime import datetime
+from uuid import uuid4
 
-from sqlalchemy import BigInteger, DateTime, ForeignKey, Unicode, func
+from sqlalchemy import  DateTime, ForeignKey, Unicode, func, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.database import Base
@@ -9,11 +10,12 @@ from app.database import Base
 class Assignment(Base):
     __tablename__ = "assignments"
 
-    assignment_id: Mapped[int] = mapped_column(
+    assignment_id: Mapped[str] = mapped_column(
         "assignment_id",
-        BigInteger,
+        String(36),
         primary_key=True,
-        autoincrement=True,
+        autoincrement=False,
+        default=lambda: str(uuid4())
     )
 
     asset_id: Mapped[int] = mapped_column(

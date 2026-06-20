@@ -12,7 +12,7 @@ class UserCreate(BaseModel):
 
 class UserResponse(BaseModel):
     """Clase donde se colocan los datos que se mandaran a llamar con peticiones post"""
-    user_id: int
+    user_id: str
     username: str
     role: str
     status: bool

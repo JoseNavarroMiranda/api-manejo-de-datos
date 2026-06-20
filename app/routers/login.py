@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from app.database import get_db
 from app.schemas.users import LoginRequest, TokenResponse
-from app.service.login_service import LoginService
+from app.service.login.login_service import LoginService
 
 router = APIRouter(
     prefix="/login",

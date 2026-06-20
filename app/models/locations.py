@@ -1,5 +1,8 @@
+
 from sqlalchemy import String, Boolean
 from sqlalchemy.orm import Mapped, mapped_column
+from uuid import uuid4
+
 
 from app.database import Base
 
@@ -7,10 +10,12 @@ class Location(Base):
     __tablename__ = "locations"
 
 
-    location_id: Mapped[int] = mapped_column(
+    location_id: Mapped[str] = mapped_column(
         "location_id",
+        String(36),
         primary_key=True,
-        autoincrement=True,
+        autoincrement=False,
+        default=lambda: str(uuid4())
     )
 
     name: Mapped[str] = mapped_column(
