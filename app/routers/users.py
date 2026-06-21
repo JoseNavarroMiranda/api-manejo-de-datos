@@ -17,7 +17,8 @@ router = APIRouter(
         response_model=UserResponse,
         status_code=201        
 )
-def create_user(user: UserCreate, db: Session = Depends(get_db)):
+def create_user(user: UserCreate, db: Session = Depends(get_db),
+                current_user: dict = Depends(get_current_user)):
     service = UserService(db)
     return service.create_user(user)
 
@@ -40,7 +41,8 @@ def get_all_users(
         response_model=UserResponse,
         status_code=200
 )
-def get_user_by_id(user_id: str, db: Session = Depends(get_db)):
+def get_user_by_id(user_id: str, db: Session = Depends(get_db),
+                   current_user: dict = Depends(get_current_user)):
     service = UserService(db)
     return service.get_user_by_id(user_id)
 
@@ -50,7 +52,9 @@ def get_user_by_id(user_id: str, db: Session = Depends(get_db)):
         response_model=MessageResponse,
         status_code=200 
 )
-def update_password_user(user: UserUpdate, user_id: str, db: Session = Depends(get_db)):
+def update_password_user(user: UserUpdate, user_id: str, db: Session = Depends(get_db),
+                         current_user: dict = Depends(get_current_user)):
+    
     service = UserService(db)
     return service.update_password_user(user_id, user)
 
@@ -60,7 +64,8 @@ def update_password_user(user: UserUpdate, user_id: str, db: Session = Depends(g
         response_model=MessageResponse,
         status_code=200
 )
-def update_role_user(user: UserUpdate, user_id: str, db: Session = Depends(get_db)):
+def update_role_user(user: UserUpdate, user_id: str, db: Session = Depends(get_db),
+                     current_user: dict = Depends(get_current_user)):
     service = UserService(db)
     return service.update_role_user(user_id, user)
 
@@ -70,6 +75,7 @@ def update_role_user(user: UserUpdate, user_id: str, db: Session = Depends(get_d
         response_model=MessageResponse,
         status_code=200
 )
-def disable_user(user: UserUpdate, user_id: str, db: Session = Depends(get_db)):
+def disable_user(user: UserUpdate, user_id: str, db: Session = Depends(get_db),
+                 current_user: dict = Depends(get_current_user)):
     service = UserService(db)
     return service.disable_user(user_id, user)
