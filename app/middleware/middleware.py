@@ -6,7 +6,6 @@ from fastapi import FastAPI
 FRONTEND_URL = os.getenv("FRONTEND_URL")
 
 
-
 def setup_cors(app: FastAPI)-> None:
     origins = [
     FRONTEND_URL,]
