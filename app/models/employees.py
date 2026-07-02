@@ -1,3 +1,5 @@
+from uuid import uuid4
+
 from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -6,10 +8,12 @@ from app.database import Base
 class Employee(Base):
     __tablename__ = "employees"
 
-    employee_id: Mapped[int] = mapped_column(
+    employee_id: Mapped[str] = mapped_column(
         "employee_id",
+        String(36),
         primary_key=True,
-        autoincrement=True,
+        autoincrement=False,
+        default=lambda: str(uuid4())
     )
 
     name: Mapped[str] = mapped_column(

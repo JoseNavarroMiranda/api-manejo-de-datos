@@ -1,6 +1,7 @@
 from datetime import date, datetime
+from uuid import  uuid4
 
-from sqlalchemy import CheckConstraint, Date, DateTime, DECIMAL, ForeignKey, Unicode, func
+from sqlalchemy import CheckConstraint, Date, DateTime, DECIMAL, ForeignKey, Unicode, func, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.database import Base
@@ -18,8 +19,10 @@ class Asset(Base):
 
     asset_id: Mapped[int] = mapped_column(
         "asset_id",
+        String(36),
         primary_key=True,
-        autoincrement=True,
+        autoincrement=False,
+        default=lambda: str(uuid4())
     )
 
     asset_tag: Mapped[str] = mapped_column(

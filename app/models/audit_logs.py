@@ -1,6 +1,7 @@
 from datetime import datetime
+from uuid import uuid4
 
-from sqlalchemy import BigInteger, DateTime, Integer, Unicode, func
+from sqlalchemy import  DateTime, String, Unicode, func
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.database import Base
@@ -9,11 +10,12 @@ from app.database import Base
 class AuditLog(Base):
     __tablename__ = "audit_logs"
 
-    audit_id: Mapped[int] = mapped_column(
+    audit_id: Mapped[str] = mapped_column(
         "audit_id",
-        BigInteger,
+        String(36),
         primary_key=True,
-        autoincrement=True,
+        autoincrement=False,
+        default=lambda: str(uuid4())
     )
 
     table_name: Mapped[str] = mapped_column(
@@ -22,9 +24,9 @@ class AuditLog(Base):
         nullable=False,
     )
 
-    record_id: Mapped[int] = mapped_column(
+    record_id: Mapped[str] = mapped_column(
         "record_id",
-        Integer,
+        String(36),
         nullable=False,
     )
 

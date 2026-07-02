@@ -1,8 +1,9 @@
 from datetime import datetime
 from decimal import Decimal
 
-from sqlalchemy import DateTime, DECIMAL, ForeignKey, Integer, func
+from sqlalchemy import DateTime, DECIMAL, ForeignKey, Integer, func, String
 from sqlalchemy.orm import Mapped, mapped_column
+from uuid import uuid4
 
 from app.database import Base
 
@@ -10,10 +11,12 @@ from app.database import Base
 class DepreciationSchedule(Base):
     __tablename__ = "depreciation_schedules"
 
-    depreciation_id: Mapped[int] = mapped_column(
+    depreciation_id: Mapped[str] = mapped_column(
         "depreciation_id",
+        String(36),
         primary_key=True,
-        autoincrement=True,
+        autoincrement=False,
+        default=lambda: str(uuid4())
     )
 
     asset_id: Mapped[int] = mapped_column(

@@ -1,0 +1,47 @@
+FLUJO DE PROYECTO - API GESTIÓN DE ACTIVOS FIJOS
+================================================
+
+Stack: FastAPI + SQLAlchemy + SQL Server + Docker
+
+Dominio: Gestión de Activos Fijos (Fixed Asset Management)
+Modelos definidos: Assets, Categories, Locations, Employees, Users,
+                   Assignments, MaintenanceLogs, DepreciationSchedules, AuditLogs
+Estado actual: Solo CRUD de Users implementado (create + list)
+
+Arquitectura por módulo:
+  router (HTTP) -> service (lógica de negocio) -> model (DB) + schema (validación)
+
+
+FASE 1: Base y Autenticación (en progreso)
+  - Auth completo: Login con JWT, refresh token, dependencias de protección
+  - Middleware: Roles (viewer/editor/admin) en cada endpoint
+  - CRUD Users completo: update, delete, get by id
+
+FASE 2: Core del negocio - Assets
+  - Schemas Pydantic para assets, categories, locations, employees
+  - Services: lógica de negocio (ej. generar asset_tag automático, validar serial único)
+  - Routers CRUD para cada entidad
+  - Endpoints: GET /assets, POST /assets, GET /assets/{id}, PUT, DELETE
+
+FASE 3: Operaciones - Asignaciones
+  - CRUD assignments (asignar activo a empleado, registrar devolución)
+  - Validaciones: activo debe estar "Disponible", empleado debe existir
+  - Actualizar current_status del asset automáticamente al asignar/devolver
+
+FASE 4: Mantenimiento y Depreciación
+  - CRUD maintenance_logs (registrar mantenimientos)
+  - CRUD depreciation_schedules (cálculo de depreciación por año fiscal)
+  - Lógica de negocio: cambiar status a "Reparacion" al crear mantenimiento, etc.
+
+FASE 5: Auditoría y Reportes
+  - audit_logs automático vía triggers o hooks SQLAlchemy (eventos after_insert,
+    after_update, after_delete)
+  - Endpoints de reportes: activos por categoría, por ubicación, historial de
+    asignaciones, vida útil restante
+  - Paginación, filtros, ordenamiento
+
+FASE 6: Mejoras
+  - Tests unitarios e integración
+  - Documentación OpenAPI (mejorar con descripciones)
+  - Rate limiting, logging estructurado
+  - CI/CD con GitHub Actions

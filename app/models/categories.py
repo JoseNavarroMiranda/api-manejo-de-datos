@@ -1,4 +1,5 @@
-from datetime import datetime, timezone 
+from datetime import datetime
+from uuid import uuid4
 
 from sqlalchemy import DateTime, String, func
 from sqlalchemy.orm import Mapped, mapped_column
@@ -9,10 +10,12 @@ from app.database import Base
 class Category(Base):
     __tablename__ = "categories"
 
-    category_id: Mapped[int] = mapped_column(
+    category_id: Mapped[str] = mapped_column(
         "category_id",
+        String(36),
         primary_key=True,
-        autoincrement=True,
+        autoincrement=False,
+        default=lambda: str(uuid4())
     )
 
     name: Mapped[str] = mapped_column(
