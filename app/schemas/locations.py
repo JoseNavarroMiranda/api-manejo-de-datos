@@ -2,8 +2,13 @@ from pydantic import BaseModel
 
 
 class CategoryCreate(BaseModel):
-    pass
+    name : str
+    address : str
+    is_virtual: bool = False
 
 
 class CategoryResponse(BaseModel):
-    pass
+    location_id: str
+    name: str
+    address : str
+    is_virtual: bool
