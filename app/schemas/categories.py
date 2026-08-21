@@ -2,7 +2,7 @@ from datetime import datetime
 from pydantic import BaseModel
 
 
-class CategoryCrate(BaseModel):
+class CategoryCreate(BaseModel):
     name : str 
     description : str | None = None
 
