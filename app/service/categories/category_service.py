@@ -70,7 +70,7 @@ class CategoryService:
 
 
     def _get_category_or_404(self, category_id: str)-> Category:
-        """Funcino que permite realizar la busqueda por id"""
+        """Funcion que permite realizar la busqueda por id"""
         category = self.db.query(Category).filter(Category.category_id == category_id).first()
         if category is None:
             raise HTTPException(status_code=404, details="Categoria no encontrada")
