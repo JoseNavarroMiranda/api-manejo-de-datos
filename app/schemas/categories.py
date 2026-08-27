@@ -12,3 +12,13 @@ class CategoryResponse(BaseModel):
     name : str
     description : str | None = None
     created_at: datetime
+
+
+class CategoryUpdate(BaseModel):
+    name: str | None  = None
+    description: str | None = None
+
+
+
+class MessageResponse(BaseModel):
+    message: str

@@ -1,4 +1,4 @@
 from pydantic import BaseModel
 
-class AssetsCrate(BaseModel):
+class AssetsCreate(BaseModel):
     pass

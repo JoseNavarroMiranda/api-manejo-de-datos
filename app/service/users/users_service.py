@@ -42,7 +42,7 @@ class UserService:
         return user
 
 
-    def update_password_user(self, user_id, data: UserUpdate):
+    def update_password_user(self, user_id: str, data: UserUpdate):
         user = self._get_user_or_404(user_id)
         try:
             user.password = hash_password(data.password)
